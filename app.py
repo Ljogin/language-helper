@@ -5,6 +5,7 @@
 
 import os
 import io
+import json
 import sqlite3
 import datetime
 from typing import List, Dict
@@ -125,7 +126,7 @@ def save_to_history(input_lang, output_lang, text_in, text_out, explanation):
             output_lang,
             text_in,
             text_out,
-            json.dumps(explanation if explanation else {}),
+            json.dumps(explanation if isinstance(explanation, dict) else {}, ensure_ascii=False),
         ),
     )
     conn.commit()
